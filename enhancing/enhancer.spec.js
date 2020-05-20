@@ -72,4 +72,59 @@ describe("enhancer", () => {
       expect(expectedItemThree.enhancement).toBe(actualItemThree.enhancement);
     });
   });
+
+  describe("fail()", () => {
+    it("should reduce the durability of an item and if enhancement is greater than 16 it takes one away from enhancement as well", () => {
+      const itemOne = {
+        name: "Rusty Iron Sword",
+        durability: 72,
+        enhancement: 20,
+      };
+
+      const itemTwo = {
+        name: "Mithril Sword",
+        durability: 17,
+        enhancement: 0,
+      };
+
+      const itemThree = {
+        name: "Mithril Sword",
+        durability: 59,
+        enhancement: 15,
+      };
+
+      const expectedItemOne = {
+        name: "Rusty Iron Sword",
+        durability: 62,
+        enhancement: 19,
+      };
+
+      const expectedItemTwo = {
+        name: "Mithril Sword",
+        durability: 12,
+        enhancement: 0,
+      };
+
+      const expectedItemThree = {
+        name: "Mithril Sword",
+        durability: 49,
+        enhancement: 15,
+      };
+
+      const actualItemOne = enhancer.fail(itemOne);
+
+      const actualItemTwo = enhancer.fail(itemTwo);
+
+      const actualItemThree = enhancer.fail(itemThree);
+
+      expect(expectedItemOne.enhancement).toBe(actualItemOne.enhancement);
+      expect(expectedItemOne.durability).toBe(actualItemOne.durability);
+
+      expect(expectedItemTwo.enhancement).toBe(actualItemTwo.enhancement);
+      expect(expectedItemTwo.durability).toBe(actualItemTwo.durability);
+
+      expect(expectedItemThree.enhancement).toBe(actualItemThree.enhancement);
+      expect(expectedItemThree.durability).toBe(actualItemThree.durability);
+    });
+  });
 });
