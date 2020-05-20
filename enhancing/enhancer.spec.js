@@ -127,4 +127,40 @@ describe("enhancer", () => {
       expect(expectedItemThree.durability).toBe(actualItemThree.durability);
     });
   });
+
+  describe("get()", () => {
+    it("should add the enhancement value to the name if value.enhancement is greater than zero", () => {
+      const itemOne = {
+        name: "Rusty Iron Sword",
+        durability: 72,
+        enhancement: 0,
+      };
+
+      const itemTwo = {
+        name: "Mithril Sword",
+        durability: 17,
+        enhancement: 20,
+      };
+
+      const expectedItemOne = {
+        name: "Rusty Iron Sword",
+        durability: 72,
+        enhancement: 0,
+      };
+
+      const expectedItemTwo = {
+        name: "[+20]Mithril Sword",
+        durability: 17,
+        enhancement: 20,
+      };
+
+      const actualItemOne = enhancer.get(itemOne);
+
+      const actualItemTwo = enhancer.get(itemTwo);
+
+      expect(expectedItemOne.name).toBe(actualItemOne.name);
+
+      expect(expectedItemTwo.name).toBe(actualItemTwo.name);
+    });
+  });
 });
